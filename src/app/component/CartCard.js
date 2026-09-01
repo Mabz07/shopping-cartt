@@ -1,12 +1,21 @@
-import ProductCard from "@/component/ProductCard";
-import Link from 'next/link'
+"use client"
+import { cart } from '@/data/cart'
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-white text-black">
-      <h1 className = "text-3xl font-bold  text-gray-800"> PRODUCTS</h1>
-      <ProductCard/>
-      <Link href="/checkout" ><button className="mt-4 px-6 py-2 bg -black text-white rounded-lg  hover:bg-gray-800 transition-colors cursor-pointer "> Go to checkout page </button> </Link>
-    </div>
-  );
+export default function ProductCard({name, price}) {
+    return (
+       <div className="bg-white border border-gray-200 rounded-lg p-6 max-w-wd w-full shadow-sm text-black">
+        <h2 className='text-2xl font-bold mb-4 border-b pb-2'> Cart Items</h2>
+
+        <div className=' flex flex-col gap-4'>
+            {cart.map((item,index) => (
+        <div key={'${item.id}-${index}'} className='flex justify-between items-center border-b pb-2'>
+            <h3 className='text-lg font-medium'>{item.name}</h3>
+            <p className='text-gray-700'>${item.price?.toFixed(2)}</p>
+        </div>
+        
+            ))}
+        </div>
+        </div>
+
+    )
 }
